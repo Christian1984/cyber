@@ -106,3 +106,28 @@ This list is considered the top 10 most dangerous vulnerabilities and is not an 
 - netcat: allows to connect to any listening port (lternative on windows is called `PowerCat`), e.g. `netcat <ip> <port>`, or `nc`
 - tmux: terminal multiplexer, tutorial: https://www.youtube.com/watch?v=Lqehvpe_djs, cheat sheet: https://tmuxcheatsheet.com/
 - vim: editor, cheat sheet: https://vimsheet.com/
+
+## essential resources
+
+### labs content:
+
+- https://owasp.org/www-project-juice-shop/
+- https://docs.rapid7.com/metasploit/metasploitable-2
+- https://github.com/rapid7/metasploitable3 (vulnerable windows)
+- https://github.com/digininja/DVWA (php/mysql)
+
+### youtube channels
+
+- https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA
+- https://www.youtube.com/channel/UCpoyhjwNIWZmsiKNKpsMAQQ
+- https://www.youtube.com/channel/UCQN2DsjnYH60SFBIA6IkNwg
+- https://www.youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w
+
+### blogs
+
+- https://0xdf.gitlab.io/
+
+### tutorials / war games
+
+- https://underthewire.tech/wargames
+- https://overthewire.org/wargames/
