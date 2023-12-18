@@ -19,6 +19,7 @@
   - `-p100-200` to specify a range, or
   - `p21,22` to specify exact ports
 - use `-v` for verbose output, also to report ports on the fly as they are detected
+- use `-oA <filename>` to output to a file
 
 # web enumeration
 
