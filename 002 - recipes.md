@@ -1,0 +1,10 @@
+- ping ip
+- nmap ip
+- deep nmap: `nmap <ip> -sC -sV -p- [-v] [--min-rate 1000]`
+- found http server?
+  - browse to domain
+  - check with Wappalizer https://www.wappalyzer.com/
+- stumbled accross a domain? enter into `/etc/hosts`
+  - enumerate subdomains with gobuster in vhost mode: `gobuster vhost -u <ip/domain, both with protocol, e.g. http://thetoppers.htbgobus> -w <wordlist> --append-domain`
+  - add subdomains to `/etc/hosts`
+  - rinse, repeat
