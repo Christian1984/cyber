@@ -1,6 +1,8 @@
+---
 module: getting started
 section: attacking your first box
 url: https://academy.hackthebox.com/module/77/section/850 ff.
+---
 
 i first ran `nmap 10.10.10.75 -sC -sV -p- --min-rate 1000 -oA nibbles-nmap`. this reveils two open ports, with http and ssh services running on their default ports. plus, i get a nice output file for future reference.
 

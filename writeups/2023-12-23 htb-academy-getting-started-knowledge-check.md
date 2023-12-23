@@ -1,6 +1,8 @@
+---
 module: getting stared
 section: knowledge check
 url: url: https://academy.hackthebox.com/module/77/section/850 ff.
+---
 
 i started with a simple ping and nmap scan of the target. while the base scan ran, i decided to visit the url in my browser. a site shows up telling us that the server runs a cms called "GetSimple" (http://get-simple.info/download/). next to the copyright information there's a link named "gettingstarted" and it points to http://gettingstarted.htb/ - this link is also to be found at the very top of the page.
 
