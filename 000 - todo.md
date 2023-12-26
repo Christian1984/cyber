@@ -14,6 +14,10 @@
 (X) hack first active box
 ( ) hack 3 active boxes (easy): ( ) 1, ( ) 2, ( ) 3
 
+# linux
+
+( ) improve terminal autocomplete/history
+
 # learn
 
 ( ) LinPEAS

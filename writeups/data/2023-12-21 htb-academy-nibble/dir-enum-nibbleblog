@@ -1,0 +1,29 @@
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.10.75/nibbleblog/
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/wordlists/dirb/common.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+[2K/.hta                 (Status: 403) [Size: 301]
+[2K/.htpasswd            (Status: 403) [Size: 306]
+[2K/admin                (Status: 301) [Size: 321] [--> http://10.10.10.75/nibbleblog/admin/]
+[2K/admin.php            (Status: 200) [Size: 1401]
+[2K/.htaccess            (Status: 403) [Size: 306]
+[2K/content              (Status: 301) [Size: 323] [--> http://10.10.10.75/nibbleblog/content/]
+[2K/index.php            (Status: 200) [Size: 2987]
+[2K/languages            (Status: 301) [Size: 325] [--> http://10.10.10.75/nibbleblog/languages/]
+[2K/plugins              (Status: 301) [Size: 323] [--> http://10.10.10.75/nibbleblog/plugins/]
+[2K/README               (Status: 200) [Size: 4628]
+[2K/themes               (Status: 301) [Size: 322] [--> http://10.10.10.75/nibbleblog/themes/]
+
+===============================================================
+Finished
+===============================================================

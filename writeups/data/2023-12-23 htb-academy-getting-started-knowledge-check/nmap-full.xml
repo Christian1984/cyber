@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.94SVN scan initiated Sat Dec 23 15:01:01 2023 as: nmap -sV -p- -oA nmap-full 10.129.69.221 -->
+<nmaprun scanner="nmap" args="nmap -sV -p- -oA nmap-full 10.129.69.221" start="1703340061" startstr="Sat Dec 23 15:01:01 2023" version="7.94SVN" xmloutputversion="1.05">
+<scaninfo type="connect" protocol="tcp" numservices="65535" services="1-65535"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="unknown-response" reason_ttl="0"/>
+<address addr="10.129.69.221" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1703340061" endtime="1703340552"><status state="up" reason="syn-ack" reason_ttl="0"/>
+<address addr="10.129.69.221" addrtype="ipv4"/>
+<hostnames>
+<hostname name="gettingstarted.htb" type="PTR"/>
+</hostnames>
+<ports><extraports state="closed" count="65533">
+<extrareasons reason="conn-refused" count="65533" proto="tcp" ports="1-21,23-79,81-65535"/>
+</extraports>
+<port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="0"/><service name="ssh" product="OpenSSH" version="8.2p1 Ubuntu 4ubuntu0.1" extrainfo="Ubuntu Linux; protocol 2.0" ostype="Linux" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:8.2p1</cpe><cpe>cpe:/o:linux:linux_kernel</cpe></service></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="0"/><service name="http" product="Apache httpd" version="2.4.41" extrainfo="(Ubuntu)" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.4.41</cpe></service></port>
+</ports>
+<times srtt="29265" rttvar="2763" to="100000"/>
+</host>
+<runstats><finished time="1703340552" timestr="Sat Dec 23 15:09:12 2023" summary="Nmap done at Sat Dec 23 15:09:12 2023; 1 IP address (1 host up) scanned in 490.79 seconds" elapsed="490.79" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

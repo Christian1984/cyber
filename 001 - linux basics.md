@@ -11,3 +11,14 @@ step 6: resice the hdd in question
 step 7: reactivate linux swap (swapon)
 step 8: click the checkmark to apply
 step 9: verufy with `df -u`
+
+## sharing clipboard
+
+- activate in vmware settings,
+- inside kali, run `apt install -y --reinstall open-vm-tools-desktop fuse`
+
+## sharing folders w/ vmware fusion and kali
+
+- create `<folder>` to share
+- activate and add in vmware settings
+- navigate to `/mnt/hgfs/<folder>`
