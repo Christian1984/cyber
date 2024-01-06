@@ -1,7 +1,12 @@
 ---
+machine: broker
+date: 2024-01-02
 url: https://app.hackthebox.com/machines/Broker
 ---
-# recon
+
+# broker
+
+## recon
 
 initial nmap scans show an ssh port 22 open and a webserver running on port 80. inital probing shows that the webserver on port requires some kind of basic auth, which is verified when trying to access the page through the browser.
 
@@ -179,7 +184,7 @@ also the mqtt broker on port 1883 offers two topics:
 - ActiveMQ/Advisory/MasterBroker: 
 - ActiveMQ/Advisory/Consumer/Topic/#: 
 
-# initial foothold
+## initial foothold
 
 according to the apachemq open wire service's fingerprint strings, there is a version number of 5.15.15 involved. without knowing much about activemq, i decided to search for and came across CVE-2023-46604 (https://www.cvedetails.com/cve/CVE-2023-46604/), which implies that there is a remote code execution vulnerability, which sounds like something we could use to establish our initial foothold via a reverse shell.
 
@@ -366,7 +371,7 @@ python3 -c 'import pty; pty.spawn("/bin/bash")'
 activemq@broker:/opt/apache-activemq-5.15.15/bin$
 ```
 
-# user flag
+## user flag
 
 the user flag is in the activemq user's home:
 
@@ -383,7 +388,7 @@ cat user.txt
 960fe798b636708a5849989b65faaab2
 ```
 
-# persistent foothold
+## persistent foothold
 
 in order to take a break, i decided to play around with establishing a persistent foothold by creating a valid ssh keypair on the target machine and then copying the private key over to my machine. it worked well and allows me to login in via
 
@@ -443,7 +448,7 @@ drwxr-x--- 5 activemq activemq 4096 Jan  2 20:20 ..
 -rw-r--r-- 1 activemq activemq  569 Jan  2 20:20 id_rsa.pub
 ```
 
-# escalation to root
+## escalation to root
 
 running `sudo -l` gives us:
 
@@ -503,7 +508,7 @@ with our browser, we can now navigate to the http-server:
 
 ![System Root](images/2024-01-02-htb-broker/system-root.png)
 
-# root flag
+## root flag
 
 the flag can be obtained through the browser or via curl:
 
@@ -512,11 +517,11 @@ $ curl 10.10.11.243:4711/root/root.txt
 f8c8d8fdd1d6dca4acb3ca0b7a955e40
 ```
 
-# summary
+## summary
 
 that was a fun machine and i was able to do it entirely on my own. i had some issues with the metasploit module, which i was able to fix after some investigation. getting full admin access to the machine, not only read-access to the file system would be nice. i'll look into the official writeup for this. but the flags where successfully obtained, so i'll count this as a win!
 
-# aftermath
+## aftermath
 
 okay, so getting full access was easier than i thought, but required a bit more knowledge about nginx. it turns out that there is a module `ngx_http_dav_module` (https://nginx.org/en/docs/http/ngx_http_dav_module.html). adding the line `dav_methods PUT` to our config file enables the WebDAV capabilities for the PUT method, and we can use this to upload files to the server. the plan to create a set of ssh keys locally and then upload the public key as the root users `authorized_keys`.
 

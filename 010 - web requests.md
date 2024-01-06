@@ -23,4 +23,4 @@ use `curl` (client URL) to submit http requests via the command line.
 - `-i` prints both the header and the body
 - `-X` can be used to specify the http-Method
 
-pipe responses into `jq` to pretty print jason responses, i.e. `curl http://example.com/api/city/london | jq`
+pipe responses into `jq` to pretty print json responses, i.e. `curl http://example.com/api/city/london | jq`

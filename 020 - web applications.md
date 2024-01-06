@@ -48,8 +48,8 @@ js scripts are often minified and obfuscated. either to protect the code from be
 
 code can be beatified directly in the browser's dev tools (Debugger -> (script) -> { } (below the "editor" window))
 
-- https://prettier.io/playground/ - beatifier
-- https://beautifier.io/ - another beatifier
+- https://prettier.io/playground/ - beautifier
+- https://beautifier.io/ - another beautifier
 - https://matthewfl.com/unPacker.html - web app to deobfuscate jso
 
 ## encodings
