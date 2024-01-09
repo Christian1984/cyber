@@ -74,7 +74,7 @@ HTTP Headers:
 coming back to the discovery of the `/nibbleblog` direcory, i then enumerated the directory with gobuster
 
 ```
-$ obuster dir -w /usr/share/wordlists/dirb/common.txt -u http://10.10.10.75/nibbleblog/ | tee dir-enum-nibbleblog
+$ gobuster dir -w /usr/share/wordlists/dirb/common.txt -u http://10.10.10.75/nibbleblog/ | tee dir-enum-nibbleblog
 ===============================================================
 Gobuster v3.6
 by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
