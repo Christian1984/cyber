@@ -6,7 +6,7 @@ url: https://app.hackthebox.com/machines/TwoMillion
 
 # two million
 
-## recon
+## recor
 
 as usual i ran several nmap scans against the target. the full-range scan didn't reveal anything in addition, so we'll take a closer look at the scan where i ran the default scripts against the previously identified open ports:
 

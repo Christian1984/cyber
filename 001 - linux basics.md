@@ -22,3 +22,8 @@ step 9: verufy with `df -u`
 - create `<folder>` to share
 - activate and add in vmware settings
 - navigate to `/mnt/hgfs/<folder>`
+
+## the linux filesystem explained (german)
+
+- https://jankarres.de/2014/01/debian-linux-verzeichnisbaum-erklaert/
+
