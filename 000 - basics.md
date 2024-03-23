@@ -131,3 +131,9 @@ This list is considered the top 10 most dangerous vulnerabilities and is not an 
 
 - https://underthewire.tech/wargames
 - https://overthewire.org/wargames/
+
+## visual studio code / codium
+
+### setup extension gallery
+
+to setup the codium's extension gallery to use the official vscode gallery, follow this guide: https://github.com/VSCodium/vscodium/blob/master/docs/index.md#how-to-use-a-different-extension-gallery
